@@ -189,8 +189,8 @@ async def webhook(request: Request):
                         f"عدد المواطنين 💁: {members_count}\n"
                         f"عدد الوزراء 😂: {admins_count}\n"
                         f"الرابط😂: ...\n\n"
-                        f"عدد المجموعات 16: {groups_count}\n"
-                        f"عدد القنوات 18: {channels_count}"
+                        f"عدد المجموعات : {groups_count}\n"
+                        f"عدد القنوات : {channels_count}"
             })
 
     return {"ok": True}
