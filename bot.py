@@ -83,7 +83,7 @@ def handle_message(message):
                 [{'text': "My channel ✌", 'url': f"https://t.me/{CHANNEL}"}],
                 [
                     {'text': "ضيفني لقناتك الجميله ✨", 'url': f"https://t.me/{bot_username}?startgroup=new"},
-                    {'text': "ضيفني لگروبك المتواضع 🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
+                    {'text': "ضيفني لگروبك🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
                 ],
                 [{'text': "المطور 🎧", 'url': f"tg://user?id={ADMIN_ID}"}]
             ]
