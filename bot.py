@@ -2,21 +2,23 @@ import requests
 import json
 import random
 from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
 
 # ---------- إعدادات البوت ----------
 TOKEN = "7541808565:AAFzfigvQbZk7wOAS7hqZdzpwyItvuV3xK4"
 ADMIN_ID = 5581457665
 CHANNEL = "qd3qd"       # القناة المطلوبة للاشتراك (بدون @)
 WEBHOOK_URL = "https://emobott.onrender.com/webhook"
-WELCOME_PHOTO = "https://zecora0.serv00.net/photo/photo.jpg"  # رابط الصورة للترحيب
+WELCOME_PHOTO = "https://emobott.onrender.com/static/welcome.jpg"  # رابط الصورة من المشروع
 EMOJIS = ["❤️", "🔥", "🎉", "👏", "🤩", "💯"]
 
 bot_url = f"https://api.telegram.org/bot{TOKEN}"
 
 # ---------- FastAPI ----------
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")  # خدمة الملفات الثابتة
 
-# ---------- دالة ارسال أي أمر للـ Telegram ----------
+# ---------- دالة إرسال أوامر للـ Telegram ----------
 def bot(method, data=None):
     if data is None:
         data = {}
@@ -31,9 +33,8 @@ def bot(method, data=None):
 
 # ---------- جلب معلومات البوت ----------
 def get_bot_info():
-    url = f"{https://t.me/CZbbbot}/getMe"
     try:
-        res = requests.get(url).json()
+        res = requests.get(f"{bot_url}/getMe").json()
         if res.get("ok"):
             return res["result"]
         return None
@@ -45,13 +46,13 @@ if not bot_info:
     print("Failed to get bot info. Exiting...")
     exit(1)
 
-bot_username = bot_info['CZBBbot']
+bot_username = bot_info['username']
 bot_name = bot_info['first_name']
 
 # ---------- تحقق الاشتراك ----------
 def check_subscription(user_id):
     try:
-        res = requests.get(f"{https://t.me/CZbbbot}/getChatMember",
+        res = requests.get(f"{bot_url}/getChatMember",
                            params={"chat_id": f"@{CHANNEL}", "user_id": user_id}).json()
         if res.get("ok"):
             status = res["result"]["status"]
@@ -73,7 +74,7 @@ def handle_message(message):
         keyboard = {"inline_keyboard":[[{"text":"📢 مَـدار","url":f"https://t.me/{CHANNEL}"}]]}
         bot("sendMessage", {
             "chat_id": chat_id,
-            "text": "🚨 اشترك حبيبي وأرسل /start .",
+            "text": "🚨اشترك حبيبي وأرسل /start .",
             "reply_markup": json.dumps(keyboard)
         })
         return
@@ -87,13 +88,13 @@ def handle_message(message):
                     {'text': "ضيف البوت للقناة ✨", 'url': f"https://t.me/{bot_username}?startgroup=new"},
                     {'text': "ضيف البوت للكروب 🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
                 ],
-                [{'text': "Div 🎧", 'url': f"tg://user?id={ADMIN_ID}"}]
+                [{'text': "المطور 🎧", 'url': f"tg://user?id={ADMIN_ID}"}]
             ]
         }
         bot("sendPhoto", {
             "chat_id": chat_id,
             "photo": WELCOME_PHOTO,
-            "caption": f"أهلاً {name}!\nالبوت {bot_name} جاهز للتفاعل 🍓",
+            "caption": f"أهلاً {name}!\nالبوت {bot_name} جاهز للتفاعل  🍓",
             "reply_markup": json.dumps(keyboard)
         })
     else:
