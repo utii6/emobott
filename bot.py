@@ -8,7 +8,6 @@ TOKEN = "7541808565:AAFzfigvQbZk7wOAS7hqZdzpwyItvuV3xK4"
 ADMIN_ID = 5581457665
 CHANNEL = "qd3qd"       # القناة المطلوبة للاشتراك (بدون @)
 WEBHOOK_URL = "https://emobott-1.onrender.com/webhook"
-WELCOME_PHOTO = "https://i.ibb.co/6ZsT3kM/welcome.jpg"  # رابط خارجي للصورة
 EMOJIS = ["❤️", "🔥", "🎉", "👏", "🤩", "💯"]
 
 bot_url = f"https://api.telegram.org/bot{TOKEN}"
@@ -83,16 +82,15 @@ def handle_message(message):
             'inline_keyboard': [
                 [{'text': "My channel ✌", 'url': f"https://t.me/{CHANNEL}"}],
                 [
-                    {'text': "ضيف البوت للقناة ✨", 'url': f"https://t.me/{bot_username}?startgroup=new"},
-                    {'text': "ضيف البوت للكروب 🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
+                    {'text': "ضيفني لقناتك الجميله ✨", 'url': f"https://t.me/{bot_username}?startgroup=new"},
+                    {'text': "ضيفني لگروبك المتواضع 🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
                 ],
                 [{'text': "المطور 🎧", 'url': f"tg://user?id={ADMIN_ID}"}]
             ]
         }
-        bot("sendPhoto", {
+        bot("sendMessage", {
             "chat_id": chat_id,
-            "photo": WELCOME_PHOTO,
-            "caption": f"أهلاً {name}!\nالبوت {bot_name} جاهز للتفاعل 🍓",
+            "text": f"أهلاً {name}!\nالبوت {bot_name} جاهز للتفاعل 🍓",
             "reply_markup": json.dumps(keyboard)
         })
     else:
