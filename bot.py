@@ -7,7 +7,7 @@ from fastapi import FastAPI, Request
 TOKEN = "7541808565:AAFzfigvQbZk7wOAS7hqZdzpwyItvuV3xK4"
 ADMIN_ID = 5581457665
 CHANNEL = "qd3qd"       # القناة المطلوبة للاشتراك (بدون @)
-WEBHOOK_URL = "https://emobott.onrender.com/webhook"
+WEBHOOK_URL = "https://emobott-1.onrender.com/webhook"
 WELCOME_PHOTO = "https://i.ibb.co/2tX5V5S/welcome.jpg"  # رابط خارجي للصورة
 EMOJIS = ["❤️", "🔥", "🎉", "👏", "🤩", "💯"]
 
