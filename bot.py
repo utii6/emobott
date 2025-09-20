@@ -49,10 +49,10 @@ def handle_message(message):
 
     # تحقق الاشتراك الإجباري
     if not check_subscription(user_id):
-        keyboard = {"inline_keyboard":[[{"text":"📢 اشترك بالقناة أولاً","url":f"https://t.me/{CHANNEL}"}]]}
+        keyboard = {"inline_keyboard":[[{"text":"📢مـَدار","url":f"https://t.me/{CHANNEL}"}]]}
         bot("sendMessage", {
             "chat_id": chat_id,
-            "text": "🚨 لازم تشترك بالقناة حتى تستخدم البوت.",
+            "text": "🚨 اشترك حبيبي وأرسل /start .",
             "reply_markup": json.dumps(keyboard)
         })
         return
@@ -99,5 +99,5 @@ def set_webhook(url):
 
 # ضع رابط مشروعك على Render مع /webhook في آخره
 # مثال: https://اسم-مشروعك.onrender.com/webhook
-WEBHOOK_URL = "ضع_رابط_مشروعك_هنا/webhook"
+WEBHOOK_URL = "https://emobott.onrender.com/webhook"
 set_webhook(WEBHOOK_URL)
