@@ -1,5 +1,5 @@
 /project
     /static
-       Welcome.jpg.JPG   # ضع هنا الصورة
+        welcome.jpg
     bot.py
     requirements.txt
