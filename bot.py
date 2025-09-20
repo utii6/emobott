@@ -78,7 +78,7 @@ def handle_message(message):
 
     # /start
     if text == "/start":
-    keyboard = {
+        keyboard = {
         'inline_keyboard': [
             [{'text': "My channel ✌", 'url': f"https://t.me/{CHANNEL}"}],
             [
