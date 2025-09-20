@@ -7,6 +7,8 @@ from fastapi import FastAPI, Request
 TOKEN = "7541808565:AAFzfigvQbZk7wOAS7hqZdzpwyItvuV3xK4"
 ADMIN_ID = 5581457665
 CHANNEL = "qd3qd"       # القناة المطلوبة للاشتراك (بدون @)
+WEBHOOK_URL = "https://emobott.onrender.com/webhook"
+WELCOME_PHOTO = "https://zecora0.serv00.net/photo/photo.jpg"  # رابط الصورة للترحيب
 EMOJIS = ["❤️", "🔥", "🎉", "👏", "🤩", "💯"]
 
 bot_url = f"https://api.telegram.org/bot{TOKEN}"
@@ -27,10 +29,29 @@ def bot(method, data=None):
         print(f"Bot error ({method}): {e}")
         return None
 
+# ---------- جلب معلومات البوت ----------
+def get_bot_info():
+    url = f"{https://t.me/CZbbbot}/getMe"
+    try:
+        res = requests.get(url).json()
+        if res.get("ok"):
+            return res["result"]
+        return None
+    except:
+        return None
+
+bot_info = get_bot_info()
+if not bot_info:
+    print("Failed to get bot info. Exiting...")
+    exit(1)
+
+bot_username = bot_info['CZBBbot']
+bot_name = bot_info['first_name']
+
 # ---------- تحقق الاشتراك ----------
 def check_subscription(user_id):
     try:
-        res = requests.get(f"{bot_url}/getChatMember",
+        res = requests.get(f"{https://t.me/CZbbbot}/getChatMember",
                            params={"chat_id": f"@{CHANNEL}", "user_id": user_id}).json()
         if res.get("ok"):
             status = res["result"]["status"]
@@ -49,7 +70,7 @@ def handle_message(message):
 
     # تحقق الاشتراك الإجباري
     if not check_subscription(user_id):
-        keyboard = {"inline_keyboard":[[{"text":"📢مـَدار","url":f"https://t.me/{CHANNEL}"}]]}
+        keyboard = {"inline_keyboard":[[{"text":"📢 مَـدار","url":f"https://t.me/{CHANNEL}"}]]}
         bot("sendMessage", {
             "chat_id": chat_id,
             "text": "🚨 اشترك حبيبي وأرسل /start .",
@@ -60,18 +81,19 @@ def handle_message(message):
     # /start
     if text == "/start":
         keyboard = {
-            "inline_keyboard":[
-                [{"text":"My channel ✌","url":f"https://t.me/{CHANNEL}"}],
+            'inline_keyboard': [
+                [{'text': "My channel ✌", 'url': f"https://t.me/{CHANNEL}"}],
                 [
-                    {"text":"ضيف البوت للقناة ✨","url":f"t.me/{TOKEN}?startgroup=new"},
-                    {"text":"ضيف البوت للكروب 🎶","url":f"t.me/{TOKEN}?startchannel=new"}
+                    {'text': "ضيف البوت للقناة ✨", 'url': f"https://t.me/{bot_username}?startgroup=new"},
+                    {'text': "ضيف البوت للكروب 🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
                 ],
-                [{"text":"المطور 🎧","url":f"tg://user?id={ADMIN_ID}"}]
+                [{'text': "Div 🎧", 'url': f"tg://user?id={ADMIN_ID}"}]
             ]
         }
-        bot("sendMessage", {
+        bot("sendPhoto", {
             "chat_id": chat_id,
-            "text": f"Hi {name}! 🌸\nالبوت جاهز للتفاعل مع رسائلك باستخدام الإيموجيات.",
+            "photo": WELCOME_PHOTO,
+            "caption": f"أهلاً {name}!\nالبوت {bot_name} جاهز للتفاعل 🍓",
             "reply_markup": json.dumps(keyboard)
         })
     else:
@@ -97,7 +119,4 @@ async def webhook(request: Request):
 def set_webhook(url):
     requests.get(f"{bot_url}/setWebhook?url={url}")
 
-# ضع رابط مشروعك على Render مع /webhook في آخره
-# مثال: https://اسم-مشروعك.onrender.com/webhook
-WEBHOOK_URL = "https://emobott.onrender.com/webhook"
 set_webhook(WEBHOOK_URL)
