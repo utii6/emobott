@@ -87,6 +87,7 @@ def handle_message(message):
                 ],
                 [{'text': "المطور 🎧", 'url': f"tg://user?id={ADMIN_ID}"}]
             ]
+        }
       bot("sendMessage", {
     "chat_id": chat_id,
     "text": f"• أهلاً بك {name} في بوت EMO 💁\n"
