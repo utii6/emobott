@@ -9,7 +9,7 @@ TOKEN = "7541808565:AAFzfigvQbZk7wOAS7hqZdzpwyItvuV3xK4"
 ADMIN_ID = 5581457665
 CHANNEL = "qd3qd"       # القناة المطلوبة للاشتراك (بدون @)
 WEBHOOK_URL = "https://emobott.onrender.com/webhook"
-WELCOME_PHOTO = "https://emobott.onrender.com/static/welcome.jpg"  # رابط الصورة من المشروع
+WELCOME_PHOTO = "https://emobott.onrender.com/static/Welcome.jpg.JPG"  # رابط الصورة من المشروع
 EMOJIS = ["❤️", "🔥", "🎉", "👏", "🤩", "💯"]
 
 bot_url = f"https://api.telegram.org/bot{TOKEN}"
