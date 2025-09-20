@@ -82,17 +82,18 @@ def handle_message(message):
             'inline_keyboard': [
                 [{'text': "My channel ✌", 'url': f"https://t.me/{CHANNEL}"}],
                 [
-                    {'text': "ضيفني لقناتك الجميله ✨", 'url': f"https://t.me/{bot_username}?startgroup=new"},
-                    {'text': "ضيفني لگروبك🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
+                    {'text': "ضيفني لقناتك ✨", 'url': f"https://t.me/{bot_username}?startgroup=new"},
+                    {'text': "ضيفني لگروبك 🎶", 'url': f"https://t.me/{bot_username}?startchannel=new"}
                 ],
                 [{'text': "المطور 🎧", 'url': f"tg://user?id={ADMIN_ID}"}]
             ]
-        }
-        bot("sendMessage", {
-            "chat_id": chat_id,
-            "text": f"أهلاً {name}!\nالبوت {bot_name} جاهز للتفاعل 🍓",
-            "reply_markup": json.dumps(keyboard)
-        })
+      bot("sendMessage", {
+    "chat_id": chat_id,
+    "text": f"• أهلاً بك {name} في بوت EMO 💁\n"
+            f"• البوت مختص للتفاعلات التلقائية..\n"
+            f"- داخل قناتك او مجموعتك 💎.",
+    "reply_markup": json.dumps(keyboard)
+})
     else:
         # تفاعل عشوائي
         emoji = random.choice(EMOJIS)
