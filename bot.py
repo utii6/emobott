@@ -4,7 +4,7 @@ import random
 from fastapi import FastAPI, Request
 
 # ---------- إعدادات البوت ----------
-TOKEN = "7541808565:AAFzfigvQbZk7wOAS7hqZdzpwyItvuV3xK4"
+TOKEN = "7541808565:AAHtdo9sZM7wvmW6UQ9-LHFhz0Uo4S5O6no"
 ADMIN_ID = 5581457665
 CHANNEL = "qd3qd"  # القناة المطلوبة للاشتراك (بدون @)
 WEBHOOK_URL = "https://emobott-1.onrender.com/webhook"
